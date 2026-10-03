@@ -7,9 +7,9 @@
       "kind": "deadline",
       "sourceUrl": "https://www.ada.gov/resources/2024-03-08-web-rule/",
       "sourceTitle": "ADA.gov — Fact Sheet: New Rule on the Accessibility of Web Content and Mobile Apps",
-      "asOf": "2026-09-30",
+      "asOf": "2026-10-03",
       "appearsOn": ["src/lib/surface.ts"],
-      "lastVerified": "2026-09-30",
+      "lastVerified": "2026-10-03",
       "status": "verified"
     },
     {
@@ -19,9 +19,9 @@
       "kind": "deadline",
       "sourceUrl": "https://www.ada.gov/resources/2024-03-08-web-rule/",
       "sourceTitle": "ADA.gov — Fact Sheet: New Rule on the Accessibility of Web Content and Mobile Apps",
-      "asOf": "2026-09-30",
+      "asOf": "2026-10-03",
       "appearsOn": ["src/lib/surface.ts"],
-      "lastVerified": "2026-09-30",
+      "lastVerified": "2026-10-03",
       "status": "verified"
     }
   ]
