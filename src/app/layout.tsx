@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Inter } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 import "@/components/site-view/simple.css";
@@ -10,6 +10,8 @@ const mono = IBM_Plex_Mono({
   variable: "--font-mono",
   weight: ["400", "500"],
 });
+/* Inter sets body and product UI in the Simple view only; the Console never reads --font-inter. */
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 export const metadata: Metadata = {
   title: "OpenLookup",
   description: "Eleven read-only lookup tools backed by live public data.",
@@ -41,7 +43,7 @@ export default function RootLayout({
     },
   };
   return (
-    <html lang="en" className={mono.variable}>
+    <html lang="en" className={`${mono.variable} ${inter.variable}`}>
       <body>
         <Analytics />
         <SmoothScroll />

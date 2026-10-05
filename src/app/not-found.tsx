@@ -18,7 +18,7 @@ export default function NotFound() {
     <PageViews
       simpleView={
         <SimpleFrame>
-          <SimplePage eyebrow="OPENLOOKUP" title="This page does not exist" intro={<p>The address may be old, or it may have a typo.</p>}>
+          <SimplePage eyebrow={PRODUCT.displayName} title="This page does not exist" intro={<p>The address may be old, or it may have a typo.</p>}>
             {links}
           </SimplePage>
         </SimpleFrame>
