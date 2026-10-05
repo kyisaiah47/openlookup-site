@@ -8,7 +8,7 @@
  * A gate fails the nightly check when this file stops matching the registry. It also fails
  * when a component draws the mark by hand.
  */
-export const MARK_SLUG = "compound-mcp-site";
+export const MARK_SLUG = "openlookup-site";
 export const MARK_VIEWBOX = "0 0 240 240";
 export const MARK_WIDTH = 240;
 export const MARK_HEIGHT = 240;
