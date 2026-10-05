@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <!-- The mark, and the one source for it. compound-ops/brand/app-icons/sync.mjs copies this
-       file into every surface that paints it: the browser tab at src/app/icon.svg, the module
-       the app’s own header renders at src/icons/mark.generated.ts, and the product tile on
-       compound-portfolio. Edit it here and run sync.mjs; do not edit the copies. -->
-  <rect width="32" height="32" rx="7" fill="#0a0a0a"/>
-  <g transform="translate(2.5 4.188) scale(0.84375)"><path d="M1 1 H31 L19.5 14 H12.5 Z" fill="#d2ca02" fill-opacity="0.62"></path><rect x="12.5" y="17" width="7" height="10" rx="1.5" fill="#d2ca02"></rect></g>
-</svg>
