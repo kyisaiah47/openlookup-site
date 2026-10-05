@@ -25,11 +25,15 @@ export default function NotFound() {
       }
       consoleView={
         <>
-          <main className="guide">
-            <div className="guide__top">
-              <Link className="guide__back" href="/">OpenLookup</Link>
+          <div className="ticker">
+            <span className="ticker__view">
               <ViewControls />
-            </div>
+            </span>
+            <span>
+              <Link className="guide__back" href="/">OpenLookup</Link>
+            </span>
+          </div>
+          <main className="guide">
             <h1>This page does not exist.</h1>
             <p className="guide__lead">The address is old or contains a typo.</p>
             {links}

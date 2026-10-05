@@ -56,7 +56,7 @@ try {
     check('Simple persists across reload', (await view(page)) === 'simple');
     await page.goto(`${BASE}/guides/what-is-a-read-only-mcp-server?view=console`, { waitUntil: 'networkidle' });
     await settle(page);
-    check('a guide with no ticker carries the toggle beside the name', (await page.locator('.guide__top .sv-view-toggle').count()) === 1);
+    check('a guide carries the toggle as the first cell of its ticker', (await page.locator('.ticker > .ticker__view:first-child .sv-view-toggle').count()) === 1);
     await page.goto(`${BASE}/?view=console&utm_source=x`, { waitUntil: 'networkidle' });
     await settle(page);
     check('URL view overrides the saved view', (await view(page)) === 'console');

@@ -55,11 +55,15 @@ export default function ReadOnlyMcpGuide() {
       }
       consoleView={
         <>
-          <main className="guide">
-            <div className="guide__top">
-              <Link className="guide__back" href="/">← OpenLookup</Link>
+          <div className="ticker">
+            <span className="ticker__view">
               <ViewControls />
-            </div>
+            </span>
+            <span>
+              <Link className="guide__back" href="/">← OpenLookup</Link>
+            </span>
+          </div>
+          <main className="guide">
             {body}
           </main>
         </>
