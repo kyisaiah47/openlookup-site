@@ -8,12 +8,15 @@ import ViewControls from './ViewControls';
 export function SimpleHeader() {
   return (
     <header className="sv-nav">
-      <Link className="sv-brand" href="/" aria-label={`${PRODUCT.displayName} home`}>
-        <span className="sv-mark">
-          <Mark />
-        </span>
-        {PRODUCT.displayName}
-      </Link>
+      <div className="sv-brand-stack">
+        <Link className="sv-brand" href="/" aria-label={`${PRODUCT.displayName} home`}>
+          <span className="sv-mark">
+            <Mark />
+          </span>
+          {PRODUCT.displayName}
+        </Link>
+        <ViewControls />
+      </div>
       <nav aria-label="Main navigation">
         <Link href="/#start">Install</Link>
         <Link href="/#example">Tools</Link>
@@ -43,7 +46,6 @@ export function SimpleFooter() {
           <a href="https://thecompound.tech/?utm_source=compound-mcp-site&utm_medium=studio_credit">Built by Compound Labs</a>
         </p>
       </div>
-      <ViewControls />
     </footer>
   );
 }

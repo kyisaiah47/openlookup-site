@@ -4,8 +4,6 @@ import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 import "@/components/site-view/simple.css";
 import SiteViewProvider from "@/components/site-view/SiteViewProvider";
-import Welcome from "@/components/site-view/Welcome";
-import Mark from "@/components/site-view/Mark";
 import Analytics from "@/components/Analytics";
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -47,28 +45,7 @@ export default function RootLayout({
       <body>
         <Analytics />
         <SmoothScroll />
-        <SiteViewProvider
-          slug="compound-mcp"
-          welcome={
-            <Welcome
-              copy={{
-                name: "OpenLookup",
-                mark: <Mark />,
-                eyebrow: "YOUR AGENT. CURRENT FACTS.",
-                question: "Does your agent answer from facts that have changed?",
-                explain:
-                  "This MCP server gives an agent read-only lookup tools backed by live public data. It answers from the source instead of from its training data.",
-                illustration: {
-                  head: "ONE QUESTION. ONE LOOKUP.",
-                  before: "You ask your agent whether a nonprofit is in good standing.",
-                  answer: "It calls a lookup tool and answers from the IRS list, with the date it checked.",
-                  tag: "READ ONLY. NO KEY.",
-                  after: "A clear result covers only the lists it checked.",
-                },
-              }}
-            />
-          }
-        >
+        <SiteViewProvider slug="compound-mcp">
           {children}
         </SiteViewProvider>
         <script

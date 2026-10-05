@@ -42,53 +42,33 @@ try {
     const { ctx, page } = await open();
     await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
     await settle(page);
-    const dlg = page.locator('dialog.sv-welcome');
-    check('welcome opens on / for a fresh visitor', await dlg.evaluate((d) => d.open));
+    check('no dialog opens on / for a fresh visitor', (await page.locator('dialog[open]').count()) === 0);
     check('fresh visitor defaults to Console', (await view(page)) === 'console');
-    check('welcome mark is the product svg', (await dlg.locator('.sv-mark svg, .sv-mark img').count()) === 1);
-    await page.screenshot({ path: `${OUT}/${PRODUCT}-welcome-1440.png` });
-    await page.keyboard.press('Escape');
-    await page.waitForTimeout(400);
-    check('Escape closes the welcome', !(await dlg.evaluate((d) => d.open)));
-    await page.locator('.sv-view-tools button', { hasText: 'Start here' }).first().click();
-    await page.waitForTimeout(400);
-    check('footer Start here reopens the welcome', await dlg.evaluate((d) => d.open));
-    await page.mouse.click(5, 5);
-    await page.waitForTimeout(400);
-    check('backdrop click closes the welcome', !(await dlg.evaluate((d) => d.open)));
-    await page.locator('.sv-view-tools button', { hasText: 'Start here' }).first().click();
-    await page.waitForTimeout(300);
-    await dlg.locator('footer input[type=checkbox]').check();
-    await dlg.locator('.sv-choices button', { hasText: 'Simple' }).click();
+    check('toggle is the first cell of the Console ticker', (await page.locator('.ticker > .ticker__view:first-child .sv-view-toggle').count()) === 1);
+    check('no footer carries a view toggle', (await page.locator('footer .sv-view-toggle').count()) === 0);
+    check('Console button is pressed', (await page.locator('.sv-view-toggle button[aria-pressed=true]').textContent())?.trim() === 'Console');
+    await page.locator('.sv-view-toggle button', { hasText: 'Simple' }).first().click();
     await page.waitForTimeout(400);
     check('choosing Simple switches the page', (await view(page)) === 'simple');
+    check('toggle sits beside the name in the Simple header', (await page.locator('header.sv-nav .sv-brand-stack .sv-view-toggle').count()) === 1);
     await page.reload({ waitUntil: 'networkidle' });
     await settle(page);
-    check('suppression persists across reload', !(await dlg.evaluate((d) => d.open)));
     check('Simple persists across reload', (await view(page)) === 'simple');
+    await page.goto(`${BASE}/guides/what-is-a-read-only-mcp-server?view=console`, { waitUntil: 'networkidle' });
+    await settle(page);
+    check('a guide with no ticker carries the toggle beside the name', (await page.locator('.guide__top .sv-view-toggle').count()) === 1);
     await page.goto(`${BASE}/?view=console&utm_source=x`, { waitUntil: 'networkidle' });
     await settle(page);
     check('URL view overrides the saved view', (await view(page)) === 'console');
-    await page.locator('.sv-view-tools button', { hasText: 'Simple' }).first().click();
+    await page.locator('.sv-view-toggle button', { hasText: 'Simple' }).first().click();
     await page.waitForTimeout(300);
     const url = new URL(page.url());
     check('switching keeps other parameters', url.searchParams.get('view') === 'simple' && url.searchParams.get('utm_source') === 'x', url.search);
     await ctx.close();
   }
   {
-    const { ctx, page } = await open(390, 844);
-    await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
-    await settle(page);
-    const fits = await page.locator('dialog.sv-welcome').evaluate((d) => {
-      const r = d.getBoundingClientRect();
-      return r.top >= 0 && r.bottom <= innerHeight && r.right <= innerWidth && getComputedStyle(d).overflowY === 'auto';
-    });
-    check('phone welcome fits the viewport and scrolls', fits);
-    await ctx.close();
-  }
-  {
     const { ctx, page } = await open();
-    await page.goto(`${BASE}/?view=simple&welcome=0`, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE}/?view=simple`, { waitUntil: 'networkidle' });
     await settle(page);
     check('one Simple header, main and footer', (await page.locator('header.sv-nav').count()) === 1 && (await page.locator('main').count()) === 1 && (await page.locator('footer.sv-footer').count()) === 1);
     check('no native select on the Simple home', (await page.locator('select').count()) === 0);
@@ -127,7 +107,7 @@ try {
   }
   {
     const { ctx, page } = await open();
-    await page.goto(`${BASE}/?view=console&welcome=0`, { waitUntil: 'networkidle' });
+    await page.goto(`${BASE}/?view=console`, { waitUntil: 'networkidle' });
     await settle(page);
     await page.screenshot({ path: `${OUT}/${PRODUCT}-console-1440.png`, fullPage: true });
     await ctx.close();
@@ -135,7 +115,7 @@ try {
   for (const width of [1440, 390]) {
     const { ctx, page } = await open(width, width === 390 ? 844 : 900);
     for (const r of ROUTES) {
-      await page.goto(`${BASE}${r}${r.includes('?') ? '&' : '?'}view=simple&welcome=0`, { waitUntil: 'networkidle' });
+      await page.goto(`${BASE}${r}${r.includes('?') ? '&' : '?'}view=simple`, { waitUntil: 'networkidle' });
       await settle(page);
       const m = await page.evaluate(() => ({
         overflow: document.documentElement.scrollWidth - innerWidth,

@@ -16,7 +16,6 @@ const readmeUrl = "https://github.com/kyisaiah47/openlookup/blob/main/README.md"
 export default function CheckMcpToolSafely() {
   const body = (
     <>
-      <Link className="guide__back" href="/">← OpenLookup</Link>
       <p className="eyebrow">Guide · updated 2026-09-30</p>
       <h1>How to check an MCP tool before you call it</h1>
       <p className="guide__lead">Check an MCP tool in three passes: inspect its declared schema, confirm the operation matches the requested boundary, and validate the returned evidence. The Model Context Protocol defines discovery with <code>tools/list</code> and invocation with <code>tools/call</code>; the protocol does not make an untrusted annotation a security guarantee.</p>
@@ -58,10 +57,13 @@ export default function CheckMcpToolSafely() {
       }
       consoleView={
         <>
-          <main className="guide">{body}</main>
-          <div className="foot-view">
-            <ViewControls />
-          </div>
+          <main className="guide">
+            <div className="guide__top">
+              <Link className="guide__back" href="/">← OpenLookup</Link>
+              <ViewControls />
+            </div>
+            {body}
+          </main>
         </>
       }
     />

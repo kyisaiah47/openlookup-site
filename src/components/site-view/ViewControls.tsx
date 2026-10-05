@@ -1,23 +1,20 @@
 'use client';
+import Icon from '@/components/Icon';
 import { useSiteView } from './SiteViewProvider';
 
-/** Both views and the welcome, in the footer of every route. */
+/** The Console / Simple switch: the Console ticker (or beside the name), and beside the name in the Simple header. */
 export default function ViewControls() {
   const mode = useSiteView();
   if (!mode) return null;
   return (
-    <div className="sv-view-tools" aria-label="Welcome and display controls">
-      <div role="group" aria-label="Page view">
-        <span>Your view</span>
-        <button type="button" onClick={() => mode.choose('console')} aria-pressed={mode.view === 'console'}>
-          Console
-        </button>
-        <button type="button" onClick={() => mode.choose('simple')} aria-pressed={mode.view === 'simple'}>
-          Simple
-        </button>
-      </div>
-      <button type="button" onClick={mode.welcome}>
-        Start here <span aria-hidden="true">↗</span>
+    <div className="sv-view-toggle" role="group" aria-label="Page view">
+      <button type="button" onClick={() => mode.choose('console')} aria-pressed={mode.view === 'console'} title="Console view">
+        <Icon name="terminal-window" size={12} />
+        Console
+      </button>
+      <button type="button" onClick={() => mode.choose('simple')} aria-pressed={mode.view === 'simple'} title="Simple view">
+        <Icon name="article" size={12} />
+        Simple
       </button>
     </div>
   );

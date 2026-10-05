@@ -15,7 +15,6 @@ const specUrl = "https://modelcontextprotocol.io/specification/2025-06-18/server
 export default function ReadOnlyMcpGuide() {
   const body = (
     <>
-      <Link className="guide__back" href="/">← OpenLookup</Link>
       <p className="eyebrow">Guide · updated 2026-09-29</p>
       <h1>What is a read-only MCP server?</h1>
       <p className="guide__lead">A read-only MCP server gives an AI application tools for retrieving information. Those tools cannot create, edit, or delete records. OpenLookup is a read-only example backed by public data. You install it with <code>npx -y openlookup</code>. An MCP client can then call eleven lookup tools.</p>
@@ -56,10 +55,13 @@ export default function ReadOnlyMcpGuide() {
       }
       consoleView={
         <>
-          <main className="guide">{body}</main>
-          <div className="foot-view">
-            <ViewControls />
-          </div>
+          <main className="guide">
+            <div className="guide__top">
+              <Link className="guide__back" href="/">← OpenLookup</Link>
+              <ViewControls />
+            </div>
+            {body}
+          </main>
         </>
       }
     />

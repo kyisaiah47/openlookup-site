@@ -139,9 +139,6 @@ function Footer() {
         <p>© 2026 {PRODUCT.displayName}.</p>
         <a href="mailto:hello@thecompound.tech">hello@thecompound.tech</a>
       </div>
-      <div className="foot-view">
-        <ViewControls />
-      </div>
     </footer>
   );
 }
@@ -191,6 +188,9 @@ function ConsoleHome() {
         </span>
       </header>
       <div className="ticker">
+        <span className="ticker__view">
+          <ViewControls />
+        </span>
         <span>
           <b>{TOOLS.length}</b> tools
         </span>

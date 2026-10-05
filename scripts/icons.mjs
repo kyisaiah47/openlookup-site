@@ -28,7 +28,8 @@ const WANT = [
   'caret-up-down', // the app switch beside the mark
   'caret-right', // a tool row that opens
   'copy', // the copy action on a command
-  'terminal-window', // a command block
+  'terminal-window', // a command block, and the Console button of the view toggle
+  'article', // the Simple button of the view toggle
   'brackets-curly', // the argument schema of a tool
   'globe-hemisphere-west', // the public endpoint a tool reads
   'clock-countdown', // the group whose answers go stale

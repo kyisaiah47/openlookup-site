@@ -3,7 +3,7 @@
 /* WHICH VIEW THIS VISITOR IS READING: Console or Simple.
  *
  * Console is the clean-visitor default. A valid `?view=simple|console` wins over the saved
- * choice, and a valid explicit choice is saved. Only the two preferences reach localStorage;
+ * choice, and a valid explicit choice is saved. Only the preference reaches localStorage;
  * drafts and picks live in the in-memory map below, so a view switch never loses them. */
 import {
   createContext,
@@ -22,8 +22,6 @@ export type SiteView = 'console' | 'simple';
 interface ViewContext {
   view: SiteView;
   choose: (view: SiteView) => void;
-  welcome: () => void;
-  keys: { view: string; welcomeOff: string; event: string };
 }
 
 const Context = createContext<ViewContext | null>(null);
@@ -52,15 +50,12 @@ export function useViewState<T>(key: string, initial: T): [T, Dispatch<SetStateA
 
 export default function SiteViewProvider({
   slug,
-  welcome,
   children,
 }: {
-  /** The storage prefix: `<slug>:view` and `<slug>:welcome-off`. */
+  /** The storage prefix: `<slug>:view`. */
   slug: string;
-  welcome: ReactNode;
   children: ReactNode;
 }) {
-  const keys = { view: `${slug}:view`, welcomeOff: `${slug}:welcome-off`, event: `${slug}:welcome` };
   const [view, setView] = useState<SiteView>('console');
   const [memory] = useState(() => new Map<string, unknown>());
   const path = usePathname();
@@ -101,15 +96,12 @@ export default function SiteViewProvider({
     document.documentElement.dataset.view = view;
   }, [view]);
 
-  const welcomeOpen = useCallback(() => window.dispatchEvent(new Event(`${slug}:welcome`)), [slug]);
-
   return (
-    <Context.Provider value={{ view, choose, welcome: welcomeOpen, keys }}>
+    <Context.Provider value={{ view, choose }}>
       <Memory.Provider value={memory}>
         <div className="site-surface" data-view={view}>
           {children}
         </div>
-        {welcome}
       </Memory.Provider>
     </Context.Provider>
   );
