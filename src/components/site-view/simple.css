@@ -40,11 +40,10 @@
 .ticker .ticker__view { display: inline-flex; align-items: center; align-self: stretch; }
 .ticker .sv-view-toggle button { font: inherit; letter-spacing: inherit; }
 /* The ticker is the rail under the bar (the guides and the 404 have no bar, so it heads the page).
- * The toggle is its first cell. It scrolls sideways inside its own box when its cells do not fit. */
-.ticker { overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: rgba(231, 233, 229, .28) transparent; }
-.ticker::-webkit-scrollbar { height: 4px; }
-.ticker::-webkit-scrollbar-thumb { background: rgba(231, 233, 229, .28); border-radius: 4px; }
-.ticker::-webkit-scrollbar-track { background: transparent; }
+ * The toggle is its first cell. It scrolls sideways inside its own box when its cells do not fit.
+ * No scrollbar on a header rail (Isaiah, 2026-10-07): it still scrolls by trackpad, wheel and touch. */
+.ticker { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -ms-overflow-style: none; }
+.ticker::-webkit-scrollbar { display: none; }
 .ticker > span { flex: none; white-space: nowrap; }
 .ticker > span:last-child { border-right: 0; }
 .ticker .guide__back { letter-spacing: 0; }
