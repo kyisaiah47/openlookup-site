@@ -33,6 +33,8 @@
 .sv-view-toggle { display: inline-flex; align-items: center; gap: 2px; padding: 1px; border: 1px solid var(--line); }
 .sv-view-toggle button { display: inline-flex; align-items: center; gap: 4px; height: 18px; padding: 0 6px; border: 0; background: none; color: var(--dim); font: 500 11px/1 var(--sv-sans, BDO, Arial, sans-serif); letter-spacing: 0; text-transform: none; cursor: pointer; transition: color 140ms, background 140ms; }
 .sv-view-toggle button:hover { color: var(--text); }
+.sv-view-toggle button:disabled { opacity: 0.4; cursor: not-allowed; }
+.sv-view-toggle button:disabled:hover { color: var(--dim); }
 .sv-view-toggle button[aria-pressed='true'] { background: rgba(174, 186, 92, 0.09); color: var(--text); }
 .sv-view-toggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .sv-view-toggle svg { display: block; flex: none; }

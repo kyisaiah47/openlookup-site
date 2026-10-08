@@ -12,7 +12,13 @@ export default function ViewControls() {
         <Icon name="terminal-window" size={12} />
         Console
       </button>
-      <button type="button" onClick={() => mode.choose('simple')} aria-pressed={mode.view === 'simple'} title="Simple view">
+      <button
+        type="button"
+        onClick={() => mode.choose('simple')}
+        aria-pressed={mode.view === 'simple'}
+        disabled={!mode.hasSimple}
+        title={mode.hasSimple ? 'Simple view' : 'This page has no Simple view'}
+      >
         <Icon name="article" size={12} />
         Simple
       </button>

@@ -20,8 +20,15 @@ import { usePathname } from 'next/navigation';
 export type SiteView = 'console' | 'simple';
 
 interface ViewContext {
+  /** The view the page renders: Simple only when the visitor chose it AND this route has one. */
   view: SiteView;
+  /** The visitor's saved choice, kept even on a route that only has a Console view. */
+  preference: SiteView;
+  /** True once the current route's PageViews has registered a Simple composition. */
+  hasSimple: boolean;
   choose: (view: SiteView) => void;
+  /** PageViews calls this on mount with its route; the returned function clears it on unmount. */
+  registerSimple: (path: string) => () => void;
 }
 
 const Context = createContext<ViewContext | null>(null);
@@ -56,9 +63,20 @@ export default function SiteViewProvider({
   slug: string;
   children: ReactNode;
 }) {
-  const [view, setView] = useState<SiteView>('console');
+  const [preference, setView] = useState<SiteView>('console');
+  /* The route whose PageViews registered a Simple composition. Keyed by path, so a route change
+   * resets it without depending on the order parent and child effects run in. */
+  const [simplePath, setSimplePath] = useState<string | null>(null);
   const [memory] = useState(() => new Map<string, unknown>());
   const path = usePathname();
+  const hasSimple = simplePath === path;
+  /* Chrome follows the body: a route with no Simple composition renders Console, never a mix. */
+  const view: SiteView = preference === 'simple' && hasSimple ? 'simple' : 'console';
+
+  const registerSimple = useCallback((at: string) => {
+    setSimplePath(at);
+    return () => setSimplePath((current) => (current === at ? null : current));
+  }, []);
 
   const choose = useCallback(
     (next: SiteView) => {
@@ -97,7 +115,7 @@ export default function SiteViewProvider({
   }, [view]);
 
   return (
-    <Context.Provider value={{ view, choose }}>
+    <Context.Provider value={{ view, preference, hasSimple, choose, registerSimple }}>
       <Memory.Provider value={memory}>
         <div className="site-surface" data-view={view}>
           {children}
